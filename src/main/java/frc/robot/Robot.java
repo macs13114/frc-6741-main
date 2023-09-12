@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -26,11 +27,9 @@ public class Robot extends TimedRobot {
   VictorSPX RightB = new VictorSPX(4);
   Encoder encL = new Encoder(0, 1, false, Encoder.EncodingType.k2X);
   Encoder encR = new Encoder(3, 4, true, Encoder.EncodingType.k2X);
+  Timer timer = new Timer();
 
   Joystick driver = new Joystick(0);
-
-  private double targetDistance = 10.0;
-  private double distanceTolerance = 0.2;
   private double setpoint;
   
   @Override
@@ -53,7 +52,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() 
   {
-
+    SmartDashboard.putNumber("Setpoint", setpoint);
+    SmartDashboard.putNumber("Enc Left", encL.getDistance());
+    SmartDashboard.putNumber("Enc Right", encR.getDistance());
   }
 
   @Override
@@ -65,7 +66,34 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() 
-  {}
+  {
+    double a = Timer.getFPGATimestamp();
+    
+    if(encL.getDistance() < 5)
+    {
+      LeftF.set(ControlMode.PercentOutput, 0.5);
+      RightF.set(ControlMode.PercentOutput, 0.5);
+    }
+    else
+    {
+      LeftF.set(ControlMode.PercentOutput, 0.0);
+      RightF.set(ControlMode.PercentOutput, 0.0);
+    }
+
+    if(a > 7)
+    {
+      if(encR.getDistance() <= 6)
+      {
+        LeftF.set(ControlMode.PercentOutput, 0.5);
+        RightF.set(ControlMode.PercentOutput, 0.5);
+      }
+      else
+      {
+        LeftF.set(ControlMode.PercentOutput, 0.0);
+        RightF.set(ControlMode.PercentOutput, 0.0);
+      }
+    }
+  }
 
   @Override
   public void teleopInit() {}
@@ -87,8 +115,6 @@ public class Robot extends TimedRobot {
       encL.reset();
       encR.reset();
     }
-
-    SmartDashboard.putNumber("Setpoint", setpoint);
     
     double dis1 = encL.getDistance();
     double dis2 = encR.getDistance();
@@ -100,9 +126,6 @@ public class Robot extends TimedRobot {
     
     LeftF.set(ControlMode.PercentOutput, out);
     RightF.set(ControlMode.PercentOutput, out2);
-
-    SmartDashboard.putNumber("Enc Left", encL.getDistance());
-    SmartDashboard.putNumber("Enc Right", encR.getDistance());
   }
 
   @Override
