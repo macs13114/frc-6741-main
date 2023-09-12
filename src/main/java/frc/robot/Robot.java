@@ -53,7 +53,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() 
   {
-
+    SmartDashboard.putNumber("Enc Left", encL.getDistance());
+    SmartDashboard.putNumber("Enc Right", encR.getDistance());
   }
 
   @Override
@@ -65,7 +66,12 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() 
-  {}
+  {
+    if(encL.getDistance() < 5)
+    {
+
+    }
+  }
 
   @Override
   public void teleopInit() {}
@@ -100,9 +106,6 @@ public class Robot extends TimedRobot {
     
     LeftF.set(ControlMode.PercentOutput, out);
     RightF.set(ControlMode.PercentOutput, out2);
-
-    SmartDashboard.putNumber("Enc Left", encL.getDistance());
-    SmartDashboard.putNumber("Enc Right", encR.getDistance());
   }
 
   @Override
