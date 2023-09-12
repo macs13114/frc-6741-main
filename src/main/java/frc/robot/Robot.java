@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-//import javax.swing.JToggleButton;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
@@ -45,12 +43,8 @@ public class Robot extends TimedRobot {
     RightF.setInverted(true);
     RightB.setInverted(true);
 
-    encL.setDistancePerPulse(1.0/256.0);
-    encR.setDistancePerPulse(1.0/256.0);
-    //encL.setReverseDirection(false);
-    //encR.setReverseDirection(true);
-    //encL.setIndexSource(2);
-    //encR.setIndexSource(5);
+    encL.setDistancePerPulse(1.0/803.0);
+    encR.setDistancePerPulse(1.0/803.0);
     
     encL.reset();
     encR.reset();
@@ -71,27 +65,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousPeriodic() 
-  {
-    double leftDistance = encL.getDistance();
-    double rightDistance = encR.getDistance();
-
-    // code for going to a setpoint but not checking if both sides are going the same speed
-    /**if(leftDistance < targetDistance || rightDistance < targetDistance)
-    {
-      LeftF.set(ControlMode.PercentOutput, 0.0);
-      RightF.set(ControlMode.PercentOutput, 0.0);
-    }*/
-    if(Math.abs(leftDistance - rightDistance) < distanceTolerance && leftDistance >= targetDistance)
-    {
-      LeftF.set(ControlMode.PercentOutput, 0.0);
-      RightF.set(ControlMode.PercentOutput, 0.0);
-    }
-    else
-    {
-      LeftF.set(ControlMode.PercentOutput, 0.5);
-      RightF.set(ControlMode.PercentOutput, 0.5);
-    }
-  }
+  {}
 
   @Override
   public void teleopInit() {}
@@ -101,7 +75,7 @@ public class Robot extends TimedRobot {
   {
     if(driver.getRawButtonPressed(1))
     {
-      setpoint = 100.0;
+      setpoint = 10.0;
     }
     if(driver.getRawButtonPressed(2))
     {
@@ -127,10 +101,8 @@ public class Robot extends TimedRobot {
     LeftF.set(ControlMode.PercentOutput, out);
     RightF.set(ControlMode.PercentOutput, out2);
 
-    SmartDashboard.putNumber("Enocder Left", encL.getDistance());
-    SmartDashboard.putNumber("Enocder Right", encR.getDistance());
-    SmartDashboard.putNumber("After LEFT",dis1);
-    SmartDashboard.putNumber("After RIGHT", dis2);
+    SmartDashboard.putNumber("Enc Left", encL.getDistance());
+    SmartDashboard.putNumber("Enc Right", encR.getDistance());
   }
 
   @Override
