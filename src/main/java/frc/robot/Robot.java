@@ -93,6 +93,10 @@ public class Robot extends TimedRobot {
         RightF.set(ControlMode.PercentOutput, 0.0);
       }
     }
+    if(encL.getDistance() < 5)
+    {
+
+    }
   }
 
   @Override
