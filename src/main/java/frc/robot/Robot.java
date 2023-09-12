@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
   {
     if(driver.getRawButtonPressed(1))
     {
-      setpoint = 5.0;
+      setpoint = 100.0;
     }
     if(driver.getRawButtonPressed(2))
     {
@@ -121,7 +121,7 @@ public class Robot extends TimedRobot {
 
     double error = setpoint - dis1;
     double out = error * 0.1;
-    double error2 = setpoint + dis2;
+    double error2 = setpoint - dis2;
     double out2 = error2 * 0.1;
     
     LeftF.set(ControlMode.PercentOutput, out);
