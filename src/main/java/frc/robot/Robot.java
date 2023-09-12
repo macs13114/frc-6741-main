@@ -120,9 +120,9 @@ public class Robot extends TimedRobot {
     double dis2 = encR.getDistance();
 
     double error = setpoint - dis1;
-    double out = error * 0.1;
+    double out = error * 0.5;
     double error2 = setpoint + dis2;
-    double out2 = error2 * 0.1;
+    double out2 = error2 * 0.5;
     
     LeftF.set(ControlMode.PercentOutput, out);
     RightF.set(ControlMode.PercentOutput, out2);
