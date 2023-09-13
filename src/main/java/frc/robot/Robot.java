@@ -53,8 +53,6 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() 
   {
     SmartDashboard.putNumber("Setpoint", setpoint);
-    SmartDashboard.putNumber("Enc Left", encL.getDistance());
-    SmartDashboard.putNumber("Enc Right", encR.getDistance());
   }
 
   @Override
@@ -67,6 +65,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() 
   {
+    SmartDashboard.putNumber("Enc Left", encL.getDistance());
+    SmartDashboard.putNumber("Enc Right", encR.getDistance());
+    
     double a = Timer.getFPGATimestamp();
     
     if(encL.getDistance() < 5)
