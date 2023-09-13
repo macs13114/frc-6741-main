@@ -83,7 +83,7 @@ public class Robot extends TimedRobot {
       }
     }
 
-    else if(a > 7)
+    /**else if(a > 7)
     {
       if(encR.getDistance() <= 10)
       {
@@ -95,7 +95,7 @@ public class Robot extends TimedRobot {
         LeftF.set(ControlMode.PercentOutput, 0.0);
         RightF.set(ControlMode.PercentOutput, 0.0);
       }
-    }
+    }*/
   }
 
   @Override
