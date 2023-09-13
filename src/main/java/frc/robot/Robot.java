@@ -118,7 +118,7 @@ public class Robot extends TimedRobot {
       encL.reset();
       encR.reset();
     }
-    
+    // pid
     double dis1 = encL.getDistance();
     double dis2 = encR.getDistance();
 
