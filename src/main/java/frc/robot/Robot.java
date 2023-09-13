@@ -69,19 +69,21 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Enc Right", encR.getDistance());
 
     double a = Timer.getFPGATimestamp();
-    
-    if(encL.getDistance() < 5)
+    if(a < 7)
     {
-      LeftF.set(ControlMode.PercentOutput, 0.5);
-      RightF.set(ControlMode.PercentOutput, 0.5);
-    }
-    else
-    {
-      LeftF.set(ControlMode.PercentOutput, 0.0);
-      RightF.set(ControlMode.PercentOutput, 0.0);
+      if(encL.getDistance() < 5)
+      {
+        LeftF.set(ControlMode.PercentOutput, 0.5);
+        RightF.set(ControlMode.PercentOutput, 0.5);
+      }
+      else
+      {
+        LeftF.set(ControlMode.PercentOutput, 0.0);
+        RightF.set(ControlMode.PercentOutput, 0.0);
+      }
     }
 
-    if(a > 7)
+    else if(a > 7)
     {
       if(encR.getDistance() <= 10)
       {
