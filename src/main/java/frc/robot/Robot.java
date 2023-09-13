@@ -84,7 +84,7 @@ public class Robot extends TimedRobot {
     {
       if(encR.getDistance() <= 6)
       {
-        LeftF.set(ControlMode.PercentOutput, 0.5);
+        LeftF.set(ControlMode.PercentOutput, -0.5);
         RightF.set(ControlMode.PercentOutput, 0.5);
       }
       else
